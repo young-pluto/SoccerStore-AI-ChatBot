@@ -174,8 +174,13 @@ body {
   overflow: hidden;
 }
 
-/* Subtle pattern overlay - only on desktop */
+/* Tablet and desktop enhancements */
 @media (min-width: 521px) {
+  .app {
+    /* Add padding so the widget doesn't touch edges */
+    padding: var(--spacing-xl);
+  }
+  
   .app::before {
     content: "";
     position: absolute;
@@ -198,13 +203,11 @@ body {
 .chat-widget {
   position: relative;
   width: 100%;
-  max-width: 480px;
   /* 
    * CRITICAL: Use 100% height, not viewport units.
    * The parent (.app) already has the correct height.
    */
   height: 100%;
-  max-height: 700px;
   
   /* Flex column for header/messages/input stack */
   display: flex;
@@ -218,6 +221,105 @@ body {
 
   /* Glassmorphism effect */
   backdrop-filter: blur(10px);
+  
+  /* 
+   * RESPONSIVE SIZING:
+   * - Mobile (< 520px): Full screen, no max constraints
+   * - Tablet (520px - 1024px): 90% width, 90% height
+   * - Desktop (> 1024px): 85% width, 90% height, capped at 1200px
+   */
+  max-width: 90%;
+  max-height: 90%;
+}
+
+/* Tablet and small desktop */
+@media (min-width: 521px) and (max-width: 1024px) {
+  .chat-widget {
+    max-width: 90%;
+    max-height: 90%;
+    min-height: 500px;
+  }
+}
+
+/* Large desktop */
+@media (min-width: 1025px) {
+  .chat-widget {
+    max-width: 85%;
+    max-height: 90%;
+    /* Cap at a reasonable max for very large screens */
+    width: min(85%, 1200px);
+    min-height: 600px;
+  }
+  
+  /* Larger padding and spacing on desktop */
+  .chat-header {
+    padding: var(--spacing-lg) var(--spacing-xl);
+  }
+  
+  .message-list {
+    padding: var(--spacing-lg) var(--spacing-xl);
+    gap: var(--spacing-lg);
+  }
+  
+  .chat-input {
+    padding: var(--spacing-lg) var(--spacing-xl);
+  }
+  
+  .quick-questions {
+    padding: var(--spacing-md) var(--spacing-xl);
+  }
+  
+  /* Slightly larger messages on desktop */
+  .message {
+    max-width: 70%;
+  }
+  
+  .message-bubble {
+    padding: var(--spacing-md) var(--spacing-lg);
+  }
+  
+  /* Larger avatars on desktop */
+  .chat-header-avatar {
+    width: 52px;
+    height: 52px;
+  }
+  
+  .chat-header-avatar svg {
+    width: 28px;
+    height: 28px;
+  }
+  
+  .avatar {
+    width: 40px;
+    height: 40px;
+  }
+  
+  .avatar svg {
+    width: 22px;
+    height: 22px;
+  }
+  
+  /* Larger input field on desktop */
+  .chat-input-field {
+    min-height: 52px;
+    font-size: var(--font-size-lg);
+  }
+  
+  .chat-send-button {
+    width: 52px;
+    height: 52px;
+  }
+  
+  .chat-send-button svg {
+    width: 24px;
+    height: 24px;
+  }
+  
+  /* Larger quick question chips */
+  .quick-question-chip {
+    padding: var(--spacing-sm) var(--spacing-lg);
+    font-size: var(--font-size-base);
+  }
 }
 
 /* --- Chat Header --- */

@@ -3,11 +3,64 @@
   <head>
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    
+    <!-- 
+      VIEWPORT META TAG - Critical for Mobile Chat UI
+      
+      - width=device-width: Match device width
+      - initial-scale=1.0: No zoom on load
+      - maximum-scale=1.0: Prevent pinch zoom (keeps chat feeling native)
+      - user-scalable=no: Disable zoom gestures
+      - viewport-fit=cover: Allow content in safe areas (notch, home indicator)
+      - interactive-widget=resizes-content: Android Chrome - resize visual viewport when keyboard opens
+    -->
     <meta
       name="viewport"
-      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, interactive-widget=resizes-content"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover, interactive-widget=resizes-content"
     />
-    <title>frontend</title>
+    
+    <!-- Theme color for browser chrome -->
+    <meta name="theme-color" content="#0a0a0f" />
+    
+    <!-- iOS Safari specific -->
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    
+    <!-- Prevent automatic phone number detection -->
+    <meta name="format-detection" content="telephone=no" />
+    
+    <title>11Yards Support</title>
+    
+    <!-- Preconnect to Google Fonts for faster font loading -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    
+    <style>
+      /* 
+        Critical CSS - Inlined to prevent FOUC (Flash of Unstyled Content)
+        These styles ensure the page doesn't jump before JS loads
+      */
+      html, body {
+        margin: 0;
+        padding: 0;
+        overflow: hidden;
+        overscroll-behavior: none;
+        background-color: #0a0a0f;
+        /* Prevent pull-to-refresh */
+        touch-action: none;
+      }
+      
+      /* Prevent body scroll on iOS Safari */
+      body {
+        position: fixed;
+        width: 100%;
+        height: 100%;
+      }
+      
+      #root {
+        height: 100%;
+      }
+    </style>
   </head>
   <body>
     <div id="root"></div>

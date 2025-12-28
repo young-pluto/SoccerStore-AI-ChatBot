@@ -1,10 +1,18 @@
 import { useChat } from '../hooks/useChat';
+import { useVisualViewport, useScrollLock } from '../hooks/useVisualViewport';
 import { MessageList } from './MessageList';
 import { ChatInput } from './ChatInput';
 import { QuickQuestions } from './QuickQuestions';
 
 export function ChatWidget() {
   const { messages, isLoading, error, sendUserMessage, clearChat, clearError } = useChat();
+
+  // Initialize visual viewport tracking for mobile keyboard handling
+  // This sets CSS custom properties that drive the layout
+  useVisualViewport();
+
+  // Lock body scroll to prevent rubber-banding on iOS Safari
+  useScrollLock();
 
   // Show quick questions only when there's just the welcome message (1 AI message)
   const showQuickQuestions = messages.length === 1 && messages[0]?.sender === 'ai';

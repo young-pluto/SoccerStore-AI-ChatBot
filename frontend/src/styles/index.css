@@ -605,18 +605,23 @@ body {
 /* --- Responsive Design --- */
 @media (max-width: 520px) {
   .app {
-    padding: 0;
+    padding: var(--spacing-sm);
+    background: #000; /* Match notch color */
   }
 
   .chat-widget {
     max-width: 100%;
-    height: 100vh;
-    max-height: none;
-    border-radius: 0;
+    height: calc(100vh - var(--spacing-md));
+    margin-top: env(safe-area-inset-top);
+    margin-bottom: env(safe-area-inset-bottom);
+    border-radius: var(--border-radius-xl);
+    box-shadow: none;
+    border: 1px solid rgba(255, 255, 255, 0.08);
   }
 
   .chat-header {
     padding: var(--spacing-md);
+    padding-top: max(var(--spacing-md), env(safe-area-inset-top)); /* Safe area support */
   }
 
   .message-list {
@@ -625,10 +630,16 @@ body {
 
   .chat-input {
     padding: var(--spacing-sm) var(--spacing-md);
+    padding-bottom: max(var(--spacing-sm), env(safe-area-inset-bottom)); /* Safe area support */
   }
 
   .message {
-    max-width: 90%;
+    max-width: 88%;
+  }
+
+  /* Smaller font for mobile */
+  :root {
+    --font-size-base: 0.9375rem; /* 15px */
   }
 
   .quick-questions {
@@ -639,10 +650,18 @@ body {
     overflow-x: auto;
     flex-wrap: nowrap;
     padding-bottom: var(--spacing-xs);
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none; /* Hide scrollbar Firefox */
+  }
+
+  .quick-questions-list::-webkit-scrollbar {
+    display: none; /* Hide scrollbar Chrome/Safari */
   }
 
   .quick-question-chip {
     flex-shrink: 0;
+    padding: 6px 12px;
+    font-size: 0.8125rem; /* 13px */
   }
 }
 

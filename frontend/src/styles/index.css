@@ -574,11 +574,39 @@ body {
 
 .quick-questions-list {
   display: flex;
-  flex-wrap: wrap;
+  flex-wrap: nowrap;
   gap: var(--spacing-sm);
+  overflow-x: auto;
+  padding-bottom: var(--spacing-xs);
+  
+  /* Smooth scrolling */
+  -webkit-overflow-scrolling: touch;
+  scroll-behavior: smooth;
+  
+  /* Hide scrollbar by default for cleaner look, show on hover/scroll if needed */
+  scrollbar-width: thin;
+  scrollbar-color: rgba(255, 255, 255, 0.2) transparent;
+}
+
+.quick-questions-list::-webkit-scrollbar {
+  height: 4px;
+}
+
+.quick-questions-list::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.quick-questions-list::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 4px;
+}
+
+.quick-questions-list::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.3);
 }
 
 .quick-question-chip {
+  flex-shrink: 0;
   padding: var(--spacing-xs) var(--spacing-md);
   background: rgba(255, 255, 255, 0.05);
   border: 1px solid rgba(255, 255, 255, 0.1);
@@ -747,17 +775,11 @@ body {
   }
 
   .quick-questions-list {
-    /* Horizontal scroll on mobile */
-    overflow-x: auto;
-    flex-wrap: nowrap;
+    /* Ensure padding is consistent */
     padding-bottom: var(--spacing-xs);
-    -webkit-overflow-scrolling: touch;
-    scrollbar-width: none;
   }
 
-  .quick-questions-list::-webkit-scrollbar {
-    display: none;
-  }
+  /* .quick-questions-list::-webkit-scrollbar handled in base styles */
 
   .quick-question-chip {
     flex-shrink: 0;

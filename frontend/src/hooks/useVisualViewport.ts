@@ -139,7 +139,8 @@ export function useScrollLock() {
     const preventScroll = (e: TouchEvent) => {
       // Allow scrolling within elements that have overflow
       const target = e.target as HTMLElement;
-      const scrollableParent = target.closest('.message-list');
+      // Check if the touch target is within a scrollable area
+      const scrollableParent = target.closest('.message-list, .quick-questions-list');
       if (!scrollableParent) {
         e.preventDefault();
       }

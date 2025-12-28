@@ -1,8 +1,12 @@
 # 11Yards AI Support Agent
 
-A mini AI support agent for a live chat widget, built for the Spur Founding Full-Stack Engineer take-home assignment.
+A production-ready AI support agent for a live chat widget, built with React, Node.js, and OpenAI GPT-4o-mini.
 
-![11Yards Chat](https://via.placeholder.com/800x400/0a0a0f/22c55e?text=11Yards+AI+Support+Agent)
+![11Yards AI Support Agent](https://firebasestorage.googleapis.com/v0/b/slot-booking-c28d8.appspot.com/o/11%20Yards%20support%20agent%2FD6EE286D-1A50-4A46-85AE-AA99F58DA466.PNG?alt=media&token=58faa2a8-4593-4617-a9d0-d7e7ce3ae1bb)
+
+## 🚀 Live Demo
+
+**[Try the Live App →](https://soccer-store-ai-chat-bot.vercel.app)**
 
 ## ⚽ About
 
@@ -14,6 +18,17 @@ A mini AI support agent for a live chat widget, built for the Spur Founding Full
 - Payment options (UPI, COD, Cards, Net Banking)
 - Customization options (name & number printing)
 - Returns & exchange policies
+
+## ✨ Features
+
+- **🤖 AI-Powered Responses** - GPT-4o-mini provides contextual, helpful answers
+- **📱 Mobile-First Design** - Native chat-like experience on iOS Safari & Android Chrome
+- **⌨️ Keyboard-Aware Layout** - Input stays fixed at bottom even when keyboard opens
+- **💬 Conversation Persistence** - Chat history preserved across page reloads
+- **🎨 Premium Dark Theme** - Modern aesthetic with football green accents
+- **📐 Responsive Design** - Adapts from mobile (100%) to desktop (85% width)
+- **⚡ Quick Questions** - One-tap common queries for faster support
+- **🔄 Real-time Typing Indicator** - Shows when AI is generating a response
 
 ## ⚡ Quick Start
 
@@ -27,8 +42,8 @@ A mini AI support agent for a live chat widget, built for the Spur Founding Full
 
 ```bash
 # Clone the repository
-git clone <repository-url>
-cd "AI Support agent"
+git clone https://github.com/young-pluto/SoccerStore-AI-ChatBot.git
+cd SoccerStore-AI-ChatBot
 
 # Install backend dependencies
 cd backend
@@ -77,6 +92,13 @@ Open [http://localhost:5173](http://localhost:5173) in your browser.
 │  │  ChatWidget │──│   useChat     │──│      API Client       │  │
 │  │  Components │  │   (Hook)      │  │  (fetch + error handling)│
 │  └─────────────┘  └───────────────┘  └───────────────────────┘  │
+│                                                                  │
+│  ┌─────────────────────────────────────────────────────────────┐│
+│  │  Mobile-First Layout (useVisualViewport + useScrollLock)    ││
+│  │  - Fixed positioning for keyboard handling                  ││
+│  │  - Visual viewport tracking for iOS Safari                  ││
+│  │  - Scroll locking to prevent rubber-banding                 ││
+│  └─────────────────────────────────────────────────────────────┘│
 └────────────────────────────────────┬────────────────────────────┘
                                      │ HTTP
 ┌────────────────────────────────────▼────────────────────────────┐
@@ -100,7 +122,7 @@ Open [http://localhost:5173](http://localhost:5173) in your browser.
 ### Directory Structure
 
 ```
-AI Support agent/
+SoccerStore-AI-ChatBot/
 ├── backend/
 │   ├── src/
 │   │   ├── index.ts              # Express server entry point
@@ -127,8 +149,11 @@ AI Support agent/
 │   │   │   ├── MessageList.tsx   # Scrollable messages
 │   │   │   ├── Message.tsx       # Single message
 │   │   │   ├── ChatInput.tsx     # Input + send
+│   │   │   ├── QuickQuestions.tsx # Quick action chips
 │   │   │   └── TypingIndicator.tsx
-│   │   ├── hooks/useChat.ts      # State management
+│   │   ├── hooks/
+│   │   │   ├── useChat.ts        # Chat state management
+│   │   │   └── useVisualViewport.ts # Mobile keyboard handling
 │   │   ├── services/api.ts       # API client
 │   │   └── styles/index.css      # Premium styling
 │   └── package.json
@@ -136,6 +161,18 @@ AI Support agent/
 ├── .env.example
 └── README.md
 ```
+
+## 📱 Mobile-First Architecture
+
+The chat UI implements a native-like experience using:
+
+| Feature | Implementation |
+|---------|----------------|
+| **Keyboard Handling** | `useVisualViewport` hook tracks `window.visualViewport` API |
+| **Fixed Input Bar** | CSS `position: fixed` with visual viewport height |
+| **Scroll Locking** | `useScrollLock` prevents iOS Safari rubber-banding |
+| **Safe Areas** | `env(safe-area-inset-*)` for notch/home indicator |
+| **Responsive Sizing** | 100% on mobile, 85-90% on tablet/desktop |
 
 ## 📊 Data Model
 
@@ -225,6 +262,7 @@ CREATE TABLE messages (
 | **10-message context window** | Balances context awareness with API costs                                          |
 | **Zod validation**            | Runtime type safety at API boundary, great error messages                          |
 | **Premium dark theme**        | Modern aesthetic with football green accents, glassmorphism effects                |
+| **visualViewport API**        | Only reliable way to handle mobile keyboard on iOS Safari                          |
 
 ## 🔜 Trade-offs & If I Had More Time...
 
@@ -260,6 +298,8 @@ CREATE TABLE messages (
 - [x] Ask about shipping → Correct policy returned
 - [x] Ask about returns → 7-day policy explained
 - [x] Ask about jerseys → Accurate product info
+- [x] Mobile keyboard → Input stays at bottom ✅
+- [x] Horizontal scroll → Quick questions scrollable ✅
 
 ### Sample Queries to Test
 
@@ -320,6 +360,15 @@ Start a new conversation with welcome message.
 
 Health check endpoint.
 
+## 🛠️ Tech Stack
+
+- **Frontend**: React 18, Vite, TypeScript
+- **Backend**: Node.js, Express, TypeScript
+- **Database**: SQLite (better-sqlite3)
+- **AI**: OpenAI GPT-4o-mini
+- **Deployment**: Vercel (frontend), Railway/Render (backend)
+- **Styling**: CSS with custom properties, mobile-first responsive design
+
 ---
 
-Built with ⚽ for the Spur take-home assignment.
+**[🚀 Try the Live Demo](https://soccer-store-ai-chat-bot.vercel.app)** | Built with ⚽ by [young-pluto](https://github.com/young-pluto)

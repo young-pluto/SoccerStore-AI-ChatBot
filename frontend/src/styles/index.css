@@ -558,6 +558,10 @@ body {
 .quick-questions {
   /* Fixed height, doesn't shrink */
   flex-shrink: 0;
+  /* Ensure it doesn't overflow parent flex container in unexpected ways */
+  min-width: 0;
+  width: 100%;
+  
   padding: var(--spacing-sm) var(--spacing-lg);
   background: var(--color-bg-tertiary);
   border-top: 1px solid rgba(255, 255, 255, 0.04);
@@ -575,8 +579,17 @@ body {
 .quick-questions-list {
   display: flex;
   flex-wrap: nowrap;
+  align-items: center;
   gap: var(--spacing-sm);
+  
+  /* CRITICAL: Ensure scrolling works */
   overflow-x: auto;
+  overflow-y: hidden;
+  width: 100%;
+  
+  /* Re-enable touch scrolling since body has touch-action: none */
+  touch-action: pan-x;
+  
   padding-bottom: var(--spacing-xs);
   
   /* Smooth scrolling */
@@ -617,6 +630,10 @@ body {
   cursor: pointer;
   transition: all var(--transition-fast);
   white-space: nowrap;
+  
+  /* Ensure user can tap/click comfortably */
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
 }
 
 .quick-question-chip:hover:not(:disabled) {

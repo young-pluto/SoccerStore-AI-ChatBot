@@ -2,7 +2,7 @@
 
 A mini AI support agent for a live chat widget, built for the Spur Founding Full-Stack Engineer take-home assignment.
 
-![11Yards Chat]((https://soccer-store-ai-chat-bot.vercel.app))
+https://soccer-store-ai-chat-bot.vercel.app
 
 ## ⚽ About
 
